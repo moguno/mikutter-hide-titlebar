@@ -1,7 +1,7 @@
 ---
 slug: :mikutter-hide-titlebar
 depends:
-  mikutter: 0.2.2.1328
+  mikutter: 0.2.2
   plugin:
   - gtk
 version: 0.1.0
