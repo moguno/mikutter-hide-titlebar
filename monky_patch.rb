@@ -3,8 +3,8 @@
 class Gtk::MikutterWindow
   alias :initialize_org :initialize
 
-  def initialize(imaginally, plugin, *args)
-    initialize_org(imaginally, plugin, *args)
+  def initialize(imaginally, *args)
+    initialize_org(imaginally, *args)
     self.decorated = false
   end
 
