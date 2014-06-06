@@ -12,13 +12,20 @@ Plugin.create(:hide_titlebar) do
           icon: "#{File.dirname(__FILE__)}/application.png",
           role: :window) do |opt| end
 
-  on_add_toolitem { |opt|
-    # ウインドウ移動ボタン押下 -> ウインドウ移動開始
-    if opt[:command][:slug] == :move_window
-      opt[:toolitem].ssc(:button_press_event) { |w, e|
+  filter_toolbar_custom_widget { |command, event, role, widget|
+    result = if command[:slug] == :move_window
+      item = Plugin::Gtk::ToolbarGenerator.create_standard_toolbutton(command, event)
+
+      item.ssc(:button_press_event) { |w, e|
         window.begin_move_drag(e.button, e.x_root, e.y_root, e.time)
       }
+ 
+      item
+    else
+      widget
     end
+
+    [command, event, role, result]
   }
 
   command(:close_window,
